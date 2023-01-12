@@ -3,7 +3,6 @@ import Nav from 'components/Nav/'
 import Footer from 'components/Footer/'
 import Card from 'components/Card/'
 import { useAxios } from 'utils/useAxios'
-import { AxiosResponse } from 'axios'
 import { useNavigate } from 'react-router-dom'
 import ICharge from 'interfaces/ICharge'
 
