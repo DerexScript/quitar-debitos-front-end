@@ -11,8 +11,7 @@
     "lint": "eslint ./",
     "lintFix": "eslint ./ --fix",
     "verifica_conflito": "eslint-config-prettier ./src/main.tsx",
-    "prepare": "husky install",
-    "commit": "cz"
+    "prepare": "husky install"
   },
   "dependencies": {
     "axios": "^1.2.2",
