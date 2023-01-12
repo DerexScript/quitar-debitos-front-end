@@ -38,6 +38,6 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
-    "./": "eslint ./"
+    "./": "eslint"
   }
 }
