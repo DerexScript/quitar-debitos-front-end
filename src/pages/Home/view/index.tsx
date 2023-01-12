@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import Nav from 'components/Nav/';
-import Footer from 'components/Footer/';
-import Card from 'components/Card/';
-import { useAxios } from 'utils/useAxios';
-import { AxiosResponse } from 'axios';
-import { useNavigate } from 'react-router-dom';
-import ICharge from 'interfaces/ICharge';
+import React, { useEffect, useState } from 'react'
+import Nav from 'components/Nav/'
+import Footer from 'components/Footer/'
+import Card from 'components/Card/'
+import { useAxios } from 'utils/useAxios'
+import { AxiosResponse } from 'axios'
+import { useNavigate } from 'react-router-dom'
+import ICharge from 'interfaces/ICharge'
 
 export default () => {
-	const navigate = useNavigate();
-	const [charges, setCharges] = useState<ICharge[]>([] as ICharge[]);
+	const navigate = useNavigate()
+	const [charges, setCharges] = useState<ICharge[]>([] as ICharge[])
 	useEffect(() => {
-		(async () => {
-			const { response } = await useAxios({ url: 'charge' });
-			setCharges(response?.data);
-		})();
-	}, []);
+		;(async () => {
+			const { response } = await useAxios({ url: 'charge' })
+			setCharges(response?.data)
+		})()
+	}, [])
 	const handleRegisterCharge = (
 		evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
 	) => {
-		evt.preventDefault();
-		return navigate('/charge/create');
-	};
+		evt.preventDefault()
+		return navigate('/charge/create')
+	}
 	return (
 		<>
 			<Nav />
@@ -57,5 +57,5 @@ export default () => {
 			</div>
 			<Footer />
 		</>
-	);
-};
+	)
+}

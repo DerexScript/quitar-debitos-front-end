@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default () => (
 	<div className='container-fluid'>
@@ -15,4 +15,4 @@ export default () => (
 			</div>
 		</div>
 	</div>
-);
+)

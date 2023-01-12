@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default ({
 	cardHeader,
@@ -6,10 +6,10 @@ export default ({
 	cardText,
 	cardFooter
 }: {
-	cardHeader: string;
-	cardTitle: string;
-	cardText: string;
-	cardFooter: string;
+	cardHeader: string
+	cardTitle: string
+	cardText: string
+	cardFooter: string
 }) => {
 	return (
 		<div className='card'>
@@ -20,5 +20,5 @@ export default ({
 			</div>
 			<div className='card-footer text-muted'>{cardFooter}</div>
 		</div>
-	);
-};
+	)
+}

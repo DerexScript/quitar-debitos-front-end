@@ -1,5 +1,5 @@
-import ChargeCreate from '../pages/Charge/create';
-import IRoutes from './IRoutes';
+import ChargeCreate from '../pages/Charge/create'
+import IRoutes from './IRoutes'
 
 const HomeRoute: IRoutes[] = [
 	{
@@ -8,6 +8,6 @@ const HomeRoute: IRoutes[] = [
 		protected: true,
 		displayName: 'Home'
 	}
-];
+]
 
-export default HomeRoute;
+export default HomeRoute

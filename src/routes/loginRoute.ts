@@ -1,5 +1,5 @@
-import Login from '../pages/Login/view';
-import IRoutes from './IRoutes';
+import Login from '../pages/Login/view'
+import IRoutes from './IRoutes'
 
 const LoginRoute: IRoutes[] = [
 	{
@@ -8,6 +8,6 @@ const LoginRoute: IRoutes[] = [
 		protected: false,
 		displayName: 'Login'
 	}
-];
+]
 
-export default LoginRoute;
+export default LoginRoute

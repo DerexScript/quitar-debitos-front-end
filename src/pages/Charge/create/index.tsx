@@ -1,23 +1,23 @@
-import Footer from 'components/Footer';
-import Nav from 'components/Nav';
-import React, { useState } from 'react';
-import ICharge from 'interfaces/ICharge';
-import { useAxios } from 'utils/useAxios';
+import Footer from 'components/Footer'
+import Nav from 'components/Nav'
+import React, { useState } from 'react'
+import ICharge from 'interfaces/ICharge'
+import { useAxios } from 'utils/useAxios'
 
 export default () => {
-	const [charge, setCharge] = useState<ICharge>({} as ICharge);
+	const [charge, setCharge] = useState<ICharge>({} as ICharge)
 	const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
-		evt.preventDefault();
+		evt.preventDefault()
 		const { response } = await useAxios({
 			url: 'charge/store',
 			method: 'POST',
 			data: charge
-		});
+		})
 		if (response) {
-			console.log(response);
+			console.log(response)
 		}
-		evt.preventDefault();
-	};
+		evt.preventDefault()
+	}
 	return (
 		<>
 			<Nav />
@@ -38,7 +38,7 @@ export default () => {
 										id='inputTitle'
 										value={charge.title || ''}
 										onChange={evt => {
-											setCharge({ ...charge, title: evt.target.value });
+											setCharge({ ...charge, title: evt.target.value })
 										}}
 										required
 									/>
@@ -51,7 +51,7 @@ export default () => {
 										id='inputDescription'
 										value={charge.description || ''}
 										onChange={evt => {
-											setCharge({ ...charge, description: evt.target.value });
+											setCharge({ ...charge, description: evt.target.value })
 										}}
 										required
 									/>
@@ -67,7 +67,7 @@ export default () => {
 											setCharge({
 												...charge,
 												total_value: parseFloat(evt.target.value)
-											});
+											})
 										}}
 										required
 									/>
@@ -83,7 +83,7 @@ export default () => {
 											setCharge({
 												...charge,
 												installments: evt.target.value
-											});
+											})
 										}}
 										required
 									/>
@@ -101,5 +101,5 @@ export default () => {
 			</div>
 			<Footer />
 		</>
-	);
-};
+	)
+}

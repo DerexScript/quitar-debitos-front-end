@@ -1,24 +1,26 @@
-import React, { FormEvent, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthContext';
-import { useAxios } from '../../../utils/useAxios';
+import React, { FormEvent, useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../../context/AuthContext'
+// import { useAxios } from '../../../utils/useAxios'
 
 type TUser = {
-	credential: string;
-	password: string;
-};
+	credential: string
+	password: string
+}
 
 export default () => {
-	const [user, setUser] = useState<TUser>({ credential: '', password: '' });
-	const auth = useContext(AuthContext);
-	const navigate = useNavigate();
+	const [user, setUser] = useState<TUser>({ credential: '', password: '' })
+	const auth = useContext(AuthContext)
+	const navigate = useNavigate()
+
 	const handleSubmit = async (evt: FormEvent<HTMLFormElement>) => {
-		evt.preventDefault();
-		const logged = await auth.authenticate(user.credential, user.password);
+		evt.preventDefault()
+		const logged = await auth.authenticate(user.credential, user.password)
 		if (logged) {
-			navigate('/');
+			navigate('/')
 		}
-	};
+	}
+
 	return (
 		<div className='container-fluid' style={{ backgroundColor: '#e9ecef' }}>
 			<div className='row'>
@@ -39,7 +41,10 @@ export default () => {
 										id='credentialInput'
 										aria-describedby='credentialHelp'
 										onChange={evt =>
-											setUser({ ...user, credential: evt.target.value })
+											setUser({
+												...user,
+												credential: evt.target.value
+											})
 										}
 										value={user.credential}
 									/>
@@ -47,16 +52,22 @@ export default () => {
 										Entre com seu e-mail ou nome de usuario.
 									</div>
 								</div>
+
 								<div className='mb-3'>
 									<label htmlFor='passwordInput' className='form-label'>
 										Senha
 									</label>
+
 									<input
 										type='password'
 										className='form-control'
 										id='passwordInput'
 										onChange={evt =>
-											setUser({ ...user, password: evt.target.value })
+											setUser({
+												...user,
+
+												password: evt.target.value
+											})
 										}
 										value={user.password}
 									/>
@@ -74,5 +85,5 @@ export default () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}

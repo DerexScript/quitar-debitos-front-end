@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 import {
 	Routes as Switch,
 	Route,
 	BrowserRouter as Router,
 	Navigate
-} from 'react-router-dom';
-import { AuthProvider } from 'context/AuthContext';
-import Guard from '../guard';
-import routes from './routes';
+} from 'react-router-dom'
+import { AuthProvider } from 'context/AuthContext'
+import Guard from '../guard'
+import routes from './routes'
 /*
 
 <Route path='/login' element={<Login />} />
@@ -32,7 +32,7 @@ function Routes(): JSX.Element {
 				</Switch>
 			</Router>
 		</AuthProvider>
-	);
+	)
 }
 
-export default Routes;
+export default Routes

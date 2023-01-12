@@ -1,5 +1,5 @@
-import Home from '../pages/Home/view';
-import IRoutes from './IRoutes';
+import Home from '../pages/Home/view'
+import IRoutes from './IRoutes'
 
 const HomeRoute: IRoutes[] = [
 	{
@@ -14,6 +14,6 @@ const HomeRoute: IRoutes[] = [
 		protected: true,
 		displayName: 'Home'
 	}
-];
+]
 
-export default HomeRoute;
+export default HomeRoute
