@@ -10,8 +10,7 @@
     "format": "prettier --check . && prettier --write .",
     "lint": "eslint ./",
     "lintFix": "eslint ./ --fix",
-    "verifica_conflito": "eslint-config-prettier ./src/main.tsx",
-    "prepare": "husky install"
+    "verifica_conflito": "eslint-config-prettier ./src/main.tsx"
   },
   "dependencies": {
     "axios": "^1.2.2",
@@ -38,6 +37,7 @@
     "vite-tsconfig-paths": "^4.0.3"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "prettier --write --ignore-unknown",
+    "./": "eslint ./"
   }
 }
