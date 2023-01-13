@@ -1,4 +1,4 @@
-import Login from '../pages/Login/view'
+import Login from 'pages/Login/view'
 import IRoutes from './IRoutes'
 
 const LoginRoute: IRoutes[] = [

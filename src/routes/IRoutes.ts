@@ -3,4 +3,5 @@ export default interface IRoutes {
 	displayName?: string
 	protected?: boolean
 	component: () => JSX.Element
+	visible?: boolean
 }

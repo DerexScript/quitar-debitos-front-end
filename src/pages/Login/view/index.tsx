@@ -1,5 +1,6 @@
 import React, { FormEvent, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { AuthContext } from '../../../context/AuthContext'
 // import { useAxios } from '../../../utils/useAxios'
 
@@ -18,6 +19,10 @@ export default () => {
 		const logged = await auth.authenticate(user.credential, user.password)
 		if (logged) {
 			navigate('/')
+		} else {
+			toast.error('Login ou senha invalidos', {
+				position: toast.POSITION.TOP_CENTER
+			})
 		}
 	}
 

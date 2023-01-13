@@ -1,4 +1,4 @@
-import Home from '../pages/Home/view'
+import Home from 'pages/Home/view'
 import IRoutes from './IRoutes'
 
 const HomeRoute: IRoutes[] = [
@@ -12,7 +12,8 @@ const HomeRoute: IRoutes[] = [
 		path: '/',
 		component: Home,
 		protected: true,
-		displayName: 'Home'
+		displayName: 'Home',
+		visible: true
 	}
 ]
 

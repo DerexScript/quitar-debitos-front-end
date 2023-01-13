@@ -6,7 +6,7 @@ import {
 	Navigate
 } from 'react-router-dom'
 import { AuthProvider } from 'context/AuthContext'
-import Guard from '../guard'
+import Guard from 'guard'
 import routes from './routes'
 /*
 
