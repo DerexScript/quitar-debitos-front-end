@@ -24,7 +24,10 @@
 			"jsx": true
 		}
 	},
-	"plugins": ["react", "@typescript-eslint"],
+	"plugins": [
+		"react",
+		"@typescript-eslint"
+	],
 	"rules": {
 		"react/display-name": "off"
 	}

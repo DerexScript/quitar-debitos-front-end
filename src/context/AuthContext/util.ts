@@ -16,10 +16,7 @@ export const getUserLocalStorage = () => {
 	return user ?? null
 }
 
-export async function LoginRequest(
-	credential: string,
-	password: string
-): Promise<{ token: string } | null> {
+export async function LoginRequest(credential: string, password: string) {
 	const { response } = await useAxios({
 		method: 'post',
 		url: 'login',

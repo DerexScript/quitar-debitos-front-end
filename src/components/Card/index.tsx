@@ -9,7 +9,7 @@ export default ({
 	cardHeader: string
 	cardTitle: string
 	cardText: string
-	cardFooter: string
+	cardFooter: JSX.Element
 }) => {
 	return (
 		<div className='card'>

@@ -3,7 +3,7 @@ import Nav from 'components/Nav/'
 import Footer from 'components/Footer/'
 import Card from 'components/Card/'
 import { useAxios } from 'utils/useAxios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ICharge from 'interfaces/ICharge'
 
 export default () => {
@@ -46,7 +46,13 @@ export default () => {
 											cardHeader: 'Cobrança',
 											cardTitle: charge.title,
 											cardText: charge.description,
-											cardFooter: 'cardFooter'
+											cardFooter: (
+												<>
+													<Link to={'/charge/' + charge.id.toString()}>
+														Gerenciar Cobrança
+													</Link>
+												</>
+											)
 										}}
 									/>
 								</div>

@@ -3,9 +3,12 @@ import Nav from 'components/Nav'
 import React, { useState } from 'react'
 import ICharge from 'interfaces/ICharge'
 import { useAxios } from 'utils/useAxios'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 export default () => {
 	const [charge, setCharge] = useState<ICharge>({} as ICharge)
+	const navigate = useNavigate()
 	const handleSubmit = async (evt: React.FormEvent<HTMLFormElement>) => {
 		evt.preventDefault()
 		const { response } = await useAxios({
@@ -14,9 +17,9 @@ export default () => {
 			data: charge
 		})
 		if (response) {
-			console.log(response)
+			toast.success('Cobrança criada com sucesso')
+			navigate('/charge')
 		}
-		evt.preventDefault()
 	}
 	return (
 		<>
@@ -87,6 +90,28 @@ export default () => {
 										}}
 										required
 									/>
+								</div>
+								<div className='col-6'>
+									<label htmlFor='inputPaymentDay'>Data de pagamento: </label>
+									<input
+										type='number'
+										min={1}
+										max={28}
+										className='form-control'
+										id='inputPaymentDay'
+										aria-describedby='paymentDayHelp'
+										value={charge.payment_day || ''}
+										onChange={evt => {
+											setCharge({
+												...charge,
+												payment_day: evt.target.value
+											})
+										}}
+										required
+									/>
+									<div id='paymentDayHelp' className='form-text'>
+										Informe um dia entre 1 e 28
+									</div>
 								</div>
 								<div className='col-12'>
 									<button type='submit' className='btn btn-primary mb-3 w-100'>

@@ -12,6 +12,9 @@ export const AuthProvider = ({ children }: IAuthProvider): JSX.Element => {
 	useEffect(() => {
 		const user = getUserLocalStorage()
 		if (user) {
+			if (Date.now() > user.expiration) {
+				logout()
+			}
 			setUser(user)
 		}
 		setLoading(false)
@@ -23,7 +26,11 @@ export const AuthProvider = ({ children }: IAuthProvider): JSX.Element => {
 	): Promise<boolean> => {
 		const res = await LoginRequest(credential, password)
 		if (res) {
-			const payload = { token: res.token, credential }
+			const payload = {
+				token: res.token,
+				credential,
+				expiration: res.token_expiration_time
+			}
 			setUser(payload)
 			setUserLocalStorage(payload)
 			return true
