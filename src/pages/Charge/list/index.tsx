@@ -27,16 +27,21 @@ export default () => {
 			<div className='mt-auto d-flex justify-content-center'>
 				<div className='container'>
 					<div className='row'>
-						<div className='col-md-12 text-center mb-2'>
-							<span className='text-black fw-bold h1'>Cobranças</span>{' '}
+						<div className='col-md-6 text-center d-flex justify-content-center'>
+							<span className='text-black fw-bold h1  text-center'>
+								Cobranças
+							</span>
+						</div>
+						<div className='col-md-6 d-flex justify-content-center'>
 							<button
-								className='btn btn-outline-primary'
+								className='btn btn-outline-primary btn-sm '
 								onClick={evt => handleRegisterCharge(evt)}
 							>
 								Adicionar +
 							</button>
 						</div>
 					</div>
+					<hr />
 					<div className='row d-flex justify-content-center'>
 						{!!charges &&
 							charges.map(charge => (
@@ -49,7 +54,7 @@ export default () => {
 											cardFooter: (
 												<>
 													<Link to={'/charge/' + charge.id.toString()}>
-														Gerenciar Cobrança
+														Gerenciar
 													</Link>
 												</>
 											)

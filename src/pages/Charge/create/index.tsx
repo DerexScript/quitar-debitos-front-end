@@ -26,6 +26,18 @@ export default () => {
 			<Nav />
 			<div className='mt-auto d-flex justify-content-center'>
 				<div className='container'>
+					<div className='row mb-5'>
+						<div className='col-md-12'>
+							<button
+								className='btn btn-light'
+								onClick={() => {
+									navigate(-1)
+								}}
+							>
+								&lt; Voltar
+							</button>
+						</div>
+					</div>
 					<div className='row'>
 						<h1 className='text-center'>Adicionar nova cobrança</h1>
 						<hr className='mb-4' />
@@ -78,14 +90,14 @@ export default () => {
 								<div className='col-6'>
 									<label htmlFor='inputInstallments'>Parcelas: </label>
 									<input
-										type='text'
+										type='number'
 										className='form-control'
 										id='inputInstallments'
-										value={charge.installments || ''}
+										value={charge.number_of_installments || 0}
 										onChange={evt => {
 											setCharge({
 												...charge,
-												installments: evt.target.value
+												number_of_installments: parseInt(evt.target.value)
 											})
 										}}
 										required
@@ -100,11 +112,11 @@ export default () => {
 										className='form-control'
 										id='inputPaymentDay'
 										aria-describedby='paymentDayHelp'
-										value={charge.payment_day || ''}
+										value={charge.payment_day || 0}
 										onChange={evt => {
 											setCharge({
 												...charge,
-												payment_day: evt.target.value
+												payment_day: parseInt(evt.target.value)
 											})
 										}}
 										required

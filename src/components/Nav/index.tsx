@@ -24,7 +24,7 @@ export default () => {
 					<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 						<ul className='navbar-nav me-auto mb-2 mb-lg-0'>
 							{routes
-								.filter(route => !!route.visible)
+								.filter(route => !!route.visible && false)
 								.map((page, index) => (
 									<li className='nav-item' key={index}>
 										<NavLink className='nav-link' to={page.path}>

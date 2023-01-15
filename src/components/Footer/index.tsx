@@ -4,6 +4,7 @@ export default () => {
 	return (
 		<footer className='mt-auto bg-dark p-2 rounded'>
 			<div className='container'>
+				{/*
 				<div className='row'>
 					<div className='col-12'>
 						<ul className='list-unstyled'>
@@ -28,6 +29,7 @@ export default () => {
 						</ul>
 					</div>
 				</div>
+				*/}
 				<div className='row'>
 					<div className='col-12 d-flex justify-content-center'>
 						<span className='text-white'>
