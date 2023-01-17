@@ -1,7 +1,7 @@
 import Footer from 'components/Footer'
 import Nav from 'components/Nav'
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAxios } from 'utils/useAxios'
 import ICharge from 'interfaces/ICharge'
 import { toast } from 'react-toastify'
@@ -22,7 +22,8 @@ export default () => {
 		})()
 	}, [])
 
-	const debtor = charge?.users.find(user => user.id !== charge.pivot.user_id)
+	const creditor = charge?.users.find(user => user.pivot.status === 'Creditor')
+	const debtor = charge?.users.find(user => user.pivot.status === 'Debtor')
 
 	const handleSendVoucher = async (
 		files: FileList | null,
@@ -93,10 +94,22 @@ export default () => {
 									<div className='col-md-9 text-muted fst-italic text-capitalize'>
 										R$ {charge.total_value}
 									</div>
-									<div className='col-md-12 mt-3 text-end'>
+									<div className='col-md-6 mt-5 text-start'>
+										Credor:{' '}
+										<span className='text-capitalize text-muted fst-italic'>
+											{creditor?.user}
+										</span>
+									</div>
+									<div className='col-md-6 mt-5 text-end'>
 										Devedor:{' '}
 										<span className='text-capitalize text-muted fst-italic'>
-											{debtor ? debtor.user : <a href='#'>Convidar Devedor</a>}
+											{debtor ? (
+												debtor.user
+											) : (
+												<Link to={'/invite-debtor/' + chargeId}>
+													Convidar Devedor
+												</Link>
+											)}
 										</span>
 									</div>
 								</>
@@ -123,13 +136,7 @@ export default () => {
 														<td>{installment.number}</td>
 														<td>R$ {installment.value}</td>
 														<td>{installment.due_date}</td>
-														<td>
-															{installment.status ? (
-																<a href='./'>Pago</a>
-															) : (
-																<a href='./'>Aberto</a>
-															)}
-														</td>
+														<td>{installment.status ? 'Pago' : 'Aberto'}</td>
 														<td>
 															<button className='btn btn-sm btn-primary me-2 mb-2'>
 																{charge.pivot.status === 'Creditor'
@@ -158,10 +165,9 @@ export default () => {
 																		'http://localhost:8000' +
 																		installment.voucher
 																	}
-																	className='btn btn-sm btn-info'
+																	className='btn btn-sm btn-info mb-2'
 																>
-																	{'-'}
-																	Ver o Comprovante{'-'}
+																	Ver o Comprovante
 																</a>
 															)}
 														</td>

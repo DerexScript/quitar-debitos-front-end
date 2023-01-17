@@ -10,7 +10,11 @@ export default interface ICharge {
 	updated_at: string
 	payment_day: number
 	installments: IInstallment[]
-	users: { id: number; user: string }[]
+	users: {
+		id: number
+		user: string
+		pivot: { user_id: number; charge_id: number; status: string }
+	}[]
 	pivot: {
 		user_id: number
 		charge_id: number

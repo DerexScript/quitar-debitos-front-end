@@ -34,7 +34,7 @@ export default () => {
 						</div>
 						<div className='col-md-6 d-flex justify-content-center'>
 							<button
-								className='btn btn-outline-primary btn-sm '
+								className='btn btn-primary btn-sm '
 								onClick={evt => handleRegisterCharge(evt)}
 							>
 								Adicionar +

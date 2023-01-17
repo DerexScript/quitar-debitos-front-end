@@ -1,5 +1,5 @@
 import React, { FormEvent, useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { AuthContext } from '../../../context/AuthContext'
 // import { useAxios } from '../../../utils/useAxios'
@@ -52,6 +52,7 @@ export default () => {
 											})
 										}
 										value={user.credential}
+										required
 									/>
 									<div id='credentialHelp' className='form-text'>
 										Entre com seu e-mail ou nome de usuario.
@@ -75,6 +76,7 @@ export default () => {
 											})
 										}
 										value={user.password}
+										required
 									/>
 								</div>
 
@@ -84,6 +86,14 @@ export default () => {
 								>
 									Entrar
 								</button>
+								<Link to='/register' className='text-decoration-none'>
+									<button
+										type='button'
+										className='btn btn-outline-info mx-auto d-block w-100 mt-2'
+									>
+										Registrar
+									</button>
+								</Link>
 							</form>
 						</div>
 					</div>

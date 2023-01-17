@@ -29,6 +29,17 @@
 		"@typescript-eslint"
 	],
 	"rules": {
-		"react/display-name": "off"
+		"react/display-name": "off",
+		"react/no-unescaped-entities": [
+			"warn",
+			{
+				"forbid": [
+					{
+						"char": "'",
+						"alternative": "&#39;"
+					}
+				]
+			}
+		]
 	}
 }
