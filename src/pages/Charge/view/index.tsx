@@ -61,6 +61,76 @@ export default () => {
 		setLoading(false)
 	}
 
+	const confirmPayment = async (installmentID: number) => {
+		const isConfirmed = window.confirm('Deseja dar baixa nesse pagamento?')
+		const installment = charge?.installments.find(
+			installment => installment.id === installmentID
+		)
+		if (!installment) {
+			toast.error('Parcela não encontrada')
+			return
+		}
+		if (installment?.voucher === null) {
+			toast.warning('Você precisa subir um comprovante antes de dar baixa.')
+			return
+		}
+		if (isConfirmed) {
+			setLoading(true)
+			const formData = new FormData()
+			formData.append('_method', 'PUT')
+			formData.append('number', installment.number.toString())
+			formData.append('value', installment.value)
+			formData.append('due_date', installment.due_date)
+			formData.append('status', 'true')
+			const { status } = await useAxios({
+				url: `installment/${installmentID}`,
+				method: 'POST',
+				data: formData
+			})
+			if (status === 200) {
+				setCharge(oldCharge => {
+					if (!oldCharge?.installments) {
+						return oldCharge
+					}
+					oldCharge.installments = oldCharge.installments.map(installment => {
+						if (installment.id === installmentID) {
+							installment.status = true
+						}
+						return installment
+					})
+					return oldCharge
+				})
+				toast.success('Baixa realizada com sucesso.')
+			} else {
+				toast.error('Erro ao dar baixa no pagamento')
+			}
+			await new Promise(resolve => setTimeout(resolve, 10))
+			setLoading(false)
+		}
+	}
+
+	const askPaymentConfirmation = async (installmentID: number) => {
+		const isConfirmed = window.confirm(
+			'Deseja solicitar baixa nesse pagamento?'
+		)
+		const installment = charge?.installments.find(
+			installment => installment.id === installmentID
+		)
+		if (!installment) {
+			toast.error('Parcela não encontrada')
+			return
+		}
+		if (installment?.voucher === null) {
+			toast.warning(
+				'Você precisa subir um comprovante antes de solicitar baixa.'
+			)
+			return
+		}
+		if (isConfirmed) {
+			console.log('')
+		}
+	}
+
 	return (
 		<>
 			<Nav />
@@ -136,13 +206,31 @@ export default () => {
 														<td>{installment.number}</td>
 														<td>R$ {installment.value}</td>
 														<td>{installment.due_date}</td>
-														<td>{installment.status ? 'Pago' : 'Aberto'}</td>
+														<td>{installment.status ? `Pago` : `Pendente`}</td>
 														<td>
-															<button className='btn btn-sm btn-primary me-2 mb-2'>
-																{charge.pivot.status === 'Creditor'
-																	? 'Dar Baixa'
-																	: 'Pedir Baixa'}
-															</button>
+															{!installment.status && (
+																<>
+																	{charge.pivot.status === 'Creditor' ? (
+																		<button
+																			onClick={() =>
+																				confirmPayment(installment.id)
+																			}
+																			className='btn btn-sm btn-primary me-2 mb-2'
+																		>
+																			Dar Baixa
+																		</button>
+																	) : (
+																		<button
+																			onClick={() =>
+																				askPaymentConfirmation(installment.id)
+																			}
+																			className='btn btn-sm btn-primary me-2 mb-2'
+																		>
+																			Pedir Baixa
+																		</button>
+																	)}
+																</>
+															)}
 															{!installment.voucher ? (
 																<label className='btn btn-sm btn-primary mb-2'>
 																	Enviar Comprovante
