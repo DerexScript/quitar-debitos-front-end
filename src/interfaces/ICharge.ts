@@ -20,4 +20,12 @@ export default interface ICharge {
 		charge_id: number
 		status: string
 	}
+	confirm_payments: {
+		id: number
+		installment_id: number
+		request_message: string
+		response_message: string
+		status: boolean
+		created_at: string
+	}[]
 }

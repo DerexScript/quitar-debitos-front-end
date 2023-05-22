@@ -127,7 +127,7 @@ export default () => {
 			return
 		}
 		if (isConfirmed) {
-			console.log('')
+			console.log(installmentID)
 		}
 	}
 
@@ -187,12 +187,55 @@ export default () => {
 						</div>
 						<div className='row'>
 							<div className='col-md-12 text-center mb-2'>
+								{charge?.pivot.status === 'Creditor' &&
+									charge.confirm_payments.find(
+										confirmPayments => confirmPayments.status == true
+									) && (
+										<table className='table table-dark table-hover table-sm caption-top'>
+											<caption className=''>Pedidos De Baixa</caption>
+											<thead>
+												<tr>
+													<th scope='col'>ID Parcela</th>
+													<th scope='col'>Mensagem</th>
+													<th scope='col'>status</th>
+													<th scope='col'>criado em</th>
+													<th scope='col'>Ações</th>
+												</tr>
+											</thead>
+											<tbody>
+												{charge.confirm_payments
+													.filter(
+														confirmPayment => confirmPayment.status == true
+													)
+													.map((confirmPayment, key) => (
+														<tr key={key}>
+															<td>{confirmPayment.installment_id}</td>
+															<td>{confirmPayment.request_message}</td>
+															<td>{confirmPayment.status}</td>
+															<td>{confirmPayment.created_at}</td>
+															<td>
+																<button className='btn btn-sm btn-outline-info disabled me-2 mb-1'>
+																	Aceitar
+																</button>
+																<button className='btn btn-sm btn-outline-danger disabled mb-1'>
+																	Recusar
+																</button>
+															</td>
+														</tr>
+													))}
+											</tbody>
+										</table>
+									)}
+							</div>
+						</div>
+						<div className='row'>
+							<div className='col-md-12 text-center mb-2'>
 								<div className='table-responsive'>
 									<table className='table table-dark table-hover table-sm caption-top'>
 										<caption className=''>Lista de Parcelas</caption>
 										<thead>
 											<tr>
-												<th scope='col'>Nª Parcela</th>
+												<th scope='col'>ID Parcela</th>
 												<th scope='col'>Valor</th>
 												<th scope='col'>Data De Vencimento</th>
 												<th scope='col'>Status</th>
@@ -203,7 +246,7 @@ export default () => {
 											{!!charge &&
 												charge.installments.map((installment, key: number) => (
 													<tr key={key}>
-														<td>{installment.number}</td>
+														<td>{installment.id}</td>
 														<td>R$ {installment.value}</td>
 														<td>{installment.due_date}</td>
 														<td>{installment.status ? `Pago` : `Pendente`}</td>
@@ -220,14 +263,28 @@ export default () => {
 																			Dar Baixa
 																		</button>
 																	) : (
-																		<button
-																			onClick={() =>
-																				askPaymentConfirmation(installment.id)
-																			}
-																			className='btn btn-sm btn-primary me-2 mb-2'
-																		>
-																			Pedir Baixa
-																		</button>
+																		<>
+																			{charge.confirm_payments.find(
+																				confirmPayment =>
+																					confirmPayment.installment_id ==
+																					installment.id
+																			) ? (
+																				<button className='btn btn-outline-gray btn-sm me-2 mb-2 disabled'>
+																					Em analise
+																				</button>
+																			) : (
+																				<button
+																					onClick={() =>
+																						askPaymentConfirmation(
+																							installment.id
+																						)
+																					}
+																					className='btn btn-sm btn-primary me-2 mb-2'
+																				>
+																					Pedir Baixa
+																				</button>
+																			)}
+																		</>
 																	)}
 																</>
 															)}
